@@ -17,7 +17,7 @@ import java.util.Locale
 class AlarmRepository(application: Application) {
     private val context: Context = application.applicationContext
 
-    fun scheduleAlarm(alarmTimeMillis:Long,dateTime: String){
+    fun scheduleAlarm(dateTime: String){
          val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
         val alarmIntent = Intent(context, AlarmReceiver::class.java)
