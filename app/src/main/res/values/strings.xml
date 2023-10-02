@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AlarmApp</string>
+    <string name="add_alarm">add alarm</string>
+    <string name="no_alarm_has_been_set_yet">No alarm has been set yet</string>
+</resources>
