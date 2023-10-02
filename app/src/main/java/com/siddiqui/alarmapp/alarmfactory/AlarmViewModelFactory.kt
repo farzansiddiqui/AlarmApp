@@ -1,8 +1,9 @@
-package com.siddiqui.alarmapp.viewmodel
+package com.siddiqui.alarmapp.alarmfactory
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.siddiqui.alarmapp.viewmodel.AlarmViewModel
 import java.lang.IllegalArgumentException
 
 class AlarmViewModelFactory(private val application: Application):ViewModelProvider.Factory {

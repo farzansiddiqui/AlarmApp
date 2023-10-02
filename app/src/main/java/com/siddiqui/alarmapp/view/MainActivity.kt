@@ -3,9 +3,7 @@ package com.siddiqui.alarmapp.view
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.media.MediaPlayer
 import android.net.Uri
-import android.opengl.Visibility
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -19,15 +17,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.siddiqui.alarmapp.adapter.AlarmAdapter
-import com.siddiqui.alarmapp.alarmBroadcast.AlarmReceiver
 import com.siddiqui.alarmapp.databinding.ActivityMainBinding
 import com.siddiqui.alarmapp.model.TimerModel
-import com.siddiqui.alarmapp.permission.NotificationPermissionHandler
-import com.siddiqui.alarmapp.repo.MediaPlayerManager
 import com.siddiqui.alarmapp.viewmodel.AlarmViewModel
-import com.siddiqui.alarmapp.viewmodel.AlarmViewModelFactory
+import com.siddiqui.alarmapp.alarmfactory.AlarmViewModelFactory
 import com.siddiqui.alarmapp.viewmodel.RecyclerViewModel
-import java.sql.Time
 
 class MainActivity : AppCompatActivity(), AlarmBottomSheet.BottomSheetListener {
     private lateinit var binding: ActivityMainBinding
