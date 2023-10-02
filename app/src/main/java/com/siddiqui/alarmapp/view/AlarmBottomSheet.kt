@@ -1,5 +1,4 @@
 package com.siddiqui.alarmapp.view
-
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,12 +9,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.TimePicker
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.siddiqui.alarmapp.R
+import com.siddiqui.alarmapp.viewmodel.AlarmViewModel
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -24,10 +25,12 @@ import java.util.Locale
 import java.util.TimeZone
 
 class AlarmBottomSheet:BottomSheetDialogFragment() {
-private lateinit var view: View
+    private lateinit var view: View
+    private lateinit var alarmViewModel: AlarmViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        alarmViewModel = ViewModelProvider(this)[AlarmViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -108,9 +111,11 @@ private lateinit var view: View
                 .setPositiveButton("okay") { dialogInterface, _ ->
                     val calendar = Calendar.getInstance()
                     calendar.add(Calendar.MINUTE, 1)
+
                   //  AlarmScheduler.scheduleAlarm(requireContext(),  "${dateChip.text} ${timerChip.text}",header!!)
 
                     val dataToSend = "${dateChip.text} ${timerChip.text}"
+                    alarmViewModel.scheduleAlarm(dataToSend)
                     val listener = activity as? BottomSheetListener
                     listener?.onDataReceived(dataToSend)
                     dialogInterface.dismiss()

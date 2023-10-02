@@ -21,16 +21,17 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.siddiqui.alarmapp.adapter.AlarmAdapter
 import com.siddiqui.alarmapp.alarmBroadcast.AlarmReceiver
 import com.siddiqui.alarmapp.databinding.ActivityMainBinding
+import com.siddiqui.alarmapp.model.TimerModel
 import com.siddiqui.alarmapp.permission.NotificationPermissionHandler
 import com.siddiqui.alarmapp.repo.MediaPlayerManager
 import com.siddiqui.alarmapp.viewmodel.AlarmViewModel
 import com.siddiqui.alarmapp.viewmodel.AlarmViewModelFactory
 import com.siddiqui.alarmapp.viewmodel.RecyclerViewModel
+import java.sql.Time
 
 class MainActivity : AppCompatActivity(), AlarmBottomSheet.BottomSheetListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var alarmViewModel: AlarmViewModel
-    private val dateList:MutableList<String> = mutableListOf()
     private lateinit var recyclerViewModel: RecyclerViewModel
     private var viewManager = LinearLayoutManager(this)
 
@@ -72,15 +73,13 @@ class MainActivity : AppCompatActivity(), AlarmBottomSheet.BottomSheetListener {
                 }*/
             }
         }
-        binding.emptyLinearLayout.hide()
+        binding.emptyLinearLayout.show()
         initialiseAdapter()
     }
 
     override fun onResume() {
         super.onResume()
-        if (dateList.isEmpty()){
-            binding.emptyLinearLayout.show()
-        }
+
     }
     private fun initialiseAdapter(){
         binding.recyclerView.layoutManager = viewManager
@@ -120,13 +119,21 @@ class MainActivity : AppCompatActivity(), AlarmBottomSheet.BottomSheetListener {
                     .create()
 
                 dialog.show()
-                // Permission denied, handle this case (e.g., show a message to the user)
             }
 
         }
     }
 
     override fun onDataReceived(data: String) {
+        if (data.isEmpty()){
+                binding.emptyLinearLayout.show()
+
+        }else{
+            val timerModel = TimerModel(data)
+            recyclerViewModel.addBlog(timerModel)
+            binding.emptyLinearLayout.hide()
+            binding.recyclerView.adapter?.notifyDataSetChanged()
+        }
 
     }
     private fun View.show(){
