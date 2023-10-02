@@ -8,8 +8,8 @@ class AlarmViewModel(application: Application):AndroidViewModel(application) {
     private val repository = AlarmRepository(application)
 
     // Function to schedule an alarm
-    fun scheduleAlarm(alarmTimeMillis: Long) {
-        repository.scheduleAlarm(alarmTimeMillis)
+    fun scheduleAlarm(alarmTimeMillis: Long,dateTime:String) {
+        repository.scheduleAlarm(alarmTimeMillis, dateTime)
     }
     // Function to show a notification
 
