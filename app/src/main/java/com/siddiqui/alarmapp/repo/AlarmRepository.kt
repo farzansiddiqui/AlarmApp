@@ -21,7 +21,8 @@ class AlarmRepository(application: Application) {
          val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
         val alarmIntent = Intent(context, AlarmReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(context, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+        val requestCode = System.currentTimeMillis().toInt()
+        val pendingIntent = PendingIntent.getBroadcast(context, requestCode, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
 
         val sdf = SimpleDateFormat("dd MMM yyyy HH:mm", Locale.getDefault())
         val date = sdf.parse(dateTime)
